@@ -1,0 +1,229 @@
+@import url(./reset.css);
+/* Fonts */
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900");
+
+html {
+    scroll-behavior: smooth;
+}
+
+:root {
+    --background: #5156e7;
+    --regform-bg: #fff;
+    --field-active: #eeeeee;
+    --form-title: #252525;
+    --textcolor: #000;
+    --error: #df362a;
+    --valid-text: rgba(0, 0, 0, 0.5);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roboto, sans-serif;
+    color: var(--textcolor);
+}
+
+.none {
+    display: none !important;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--background);
+}
+
+.reg-form {
+    position: relative;
+    max-width: 500px;
+    width: 100%;
+    padding: 30px;
+    margin: 30px 0;
+    border-radius: 15px;
+    background-color: var(--regform-bg);
+}
+
+.reg-form__header {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.reg-form__title {
+    color: var(--form-title);
+    font-size: 25px;
+    font-weight: 600;
+
+}
+
+.logo {
+    width: 48px;
+    height: 48px;
+    display: flex;
+
+}
+
+.reg-form__info {
+    margin-bottom: 30px;
+}
+
+.field {
+    margin-bottom: 25px;
+    border-radius: 10px;
+}
+
+.field__input {
+    position: relative;
+    border-radius: inherit;
+}
+
+.field__input:focus,
+.field__input:hover {
+    background-color: var(--field-active);
+}
+
+.field__input input {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    border: 1px solid #d1d1d1;
+}
+
+.field .error {
+    display: flex;
+    align-items: center;
+    /* margin-top: 3px; */
+    color: var(--error);
+    font-size: 13px;
+    display: none;
+}
+
+.invalid input {
+    border-color: var(--error);
+}
+
+.invalid .error {
+    display: flex;
+}
+
+.error .error__icon {
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+.error .error__text {
+    font-size: 14px;
+    color: var(--error)
+}
+
+.field--role {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 10px;
+}
+
+.role__option {
+    display: flex;
+    gap: 15px;
+}
+
+.role__option p::first-letter {
+    text-transform: capitalize;
+}
+
+.role__item {}
+
+.field--payment {}
+
+.payment {}
+
+.error--payment {}
+
+.field--mail {}
+
+.mail {}
+
+.error--mail {}
+
+.password--create {}
+
+.pass {}
+
+.error--password {}
+
+.password--confurm {}
+
+.password--confurm .valid__text {
+    text-align: center;
+    font-size: 14px;
+    color: var(--valid-text);
+}
+
+/* Отображение и скрытие пароля */
+
+.field__input .hide-show {
+    position: absolute;
+    right: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #919191;
+    cursor: pointer;
+    padding: 3px;
+}
+
+.eye-hide,
+.eye-show {
+    width: 16px;
+    height: 16px;
+    position: relative;
+    background-position: center center;
+    background-size: auto;
+    background-repeat: no-repeat;
+
+}
+
+.eye-hide {
+    background-image: url(./../img/reg-form/eye-hide.svg);
+}
+
+.eye-show {
+    background-image: url(./../img/reg-form/eye-show.svg);
+}
+
+.pass-confurm {}
+
+.btn {
+    margin: 25px 0px 6px;
+}
+
+.btn--submit {
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn input {
+    height: 55px;
+    width: 100%;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: #4070f4;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn input:hover {
+    background-color: #0e4bf1;
+}

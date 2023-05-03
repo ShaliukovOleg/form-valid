@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/main.css">
+
+    <!-- <title>SignUp Validation-Form</title> -->
+</head>
+
+<body>
+    <div class="reg-form">
+        <div class="reg-form__header">
+            <p class="reg-form__title">Create your account</p>
+            <div class="logo">
+                <img src="./img/reg-form/logo.svg" alt="logo">
+            </div>
+        </div>
+        <form class="reg-form__info" action="#!">
+            <!-- Логин и проверка на доступность -->
+            <div class="field field--login">
+                <div class="field__input">
+                    <input type="text" placeholder="Login" class="login">
+                </div>
+                <span class="error error--login">
+                    <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
+                    <p class="error__text">Login is taken, please choose another one</p>
+                </span>
+            </div>
+
+            <!-- Имя пользователя (проверка на максимум символов) -->
+            <div class="field field--name">
+                <div class="field__input">
+                    <input type="text" placeholder="First name" class="first-name">
+                </div>
+                <span class="error error--first-name">
+                    <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
+                    <p class="error__text">Please no less than 4 and no more than 20 characters</p>
+                </span>
+            </div>
+
+            <!-- Фамилия пользователя (проверка на максимум символов) -->
+            <div class="field field--lastname">
+                <div class="field__input">
+                    <input type="text" placeholder="Last name" class="last-name">
+                </div>
+                <span class="error error--first-name">
+                    <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
+                    <p class="error__text">Please no less than 4 and no more than 20 characters</p>
+                </span>
+            </div>
+
+            <!-- Дата рождения, проверка не ниже чем 1940 год -->
+            <div class="field field--date none">
+                <div class="field__input">
+                    <input type="text" placeholder="Date of Birth" class="date">
+                </div>
+                <span class="error error--date">
+                    <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
+                    <p class="error__text">The date cannot be lower than 1940</p>
+                </span>
+            </div>
+
+            <!-- Роль, выбор из предложенных вариантов -->
+            <div class="field field--role none">
+                <label class="role__option">
+                    <input type="radio" class="role__item" name="role" checked>
+                    <p class="role__info">frontend developer</p>
+                </label>
+
+                <label class="role__option">
+                    <input type="radio" class="role__item" name="role">
+                    <p class="role__info">backend developer</p>
+                </label>
+
+                <label class="role__option">
+                    <input type="radio" class="role__item" name="role">
+                    <p class="role__info">fullstack developer</p>
+                </label>
+
+                <label class="role__option">
+                    <input type="radio" class="role__item" name="role">
+                    <p class="role__info">designer</p>
+                </label>
+
+                <label class="role__option">
+                    <input type="radio" class="role__item" name="role">
+                    <p class="role__info">product manager</p>
+                </label>
+
+                <label class="role__option">
+                    <input type="radio" class="role__item" name="role">
+                    <p class="role__info">teamlead</p>
+
+                </label>
+            </div>
+
+            <!-- Сумма оплаты, проверка на число без плавающей точки -->
+            <div class="field field--payment none">
+                <div class="field__input">
+                    <input type="number" placeholder="Payment" class="payment">
+                </div>
+                <span class="error error--payment">
+                    <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
+                    <p class="error__text">Please enter an integer</p>
+                </span>
+            </div>
+
+            <!-- Почта и проверка на валидность -->
+            <div class="field field--mail none">
+                <div class="field__input">
+                    <input type="email" placeholder="Username" class="mail">
+                </div>
+                <span class="error error--mail">
+                    <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
+                    <p class="error__text">Please enter a valid email</p>
+                </span>
+            </div>
+
+            <!-- Пароль, глазик и проверка на валидность -->
+            <div class="field password--create none">
+                <div class="field__input">
+                    <input type="password" placeholder="Create password" class="password">
+                    <div class="eye-hide hide-show"></div>
+                </div>
+                <span class="error error--password">
+                    <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
+                    <p class="error__text">Please enter at least 8 character with number, symbol, small and capital
+                        letter</p>
+                </span>
+            </div>
+
+            <!-- Подтверждение пароля -->
+            <div class="field password--confurm">
+                <div class="field__input ">
+                    <input type="password" placeholder="Confurm password" class="password-confurm">
+                    <div class="eye-hide hide-show"></div>
+                </div>
+                <p class="valid__text">You can use letters, numbers and full stops</p>
+                <span class="error error--password">
+                    <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
+                    <p class="error__text">Password don't match</p>
+                </span>
+            </div>
+
+            <!-- Кнопка Submit и проверка на валидацию всех граф и выгрузка в объект -->
+            <div class="btn btn--submit">
+                <input type="submit" value="Submit" />
+            </div>
+        </form>
+    </div>
+
+    <script src="./js/main.js"></script>
+</body>
+
+</html>
