@@ -74,6 +74,7 @@ body {
 .field {
     margin-bottom: 25px;
     border-radius: 10px;
+    min-height: 75px;
 }
 
 .field__input {
@@ -96,12 +97,22 @@ body {
     border: 1px solid #d1d1d1;
 }
 
-.field .error {
+.field--login .valid-text,
+.field--date .valid-text {
+    display: flex;
+    margin-left: 5px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--valid-text);
+}
+
+.invalid .valid-text {
+    display: none;
+}
+
+.error {
     display: flex;
     align-items: center;
-    /* margin-top: 3px; */
-    color: var(--error);
-    font-size: 13px;
     display: none;
 }
 
@@ -113,9 +124,19 @@ body {
     display: flex;
 }
 
-.error .error__icon {
-    margin-left: 10px;
-    margin-right: 5px;
+.invalid .error .error__icon {
+    margin-left: 5px;
+    margin-right: 0px;
+}
+
+.invalid .error .error__text {
+    color: var(--error);
+    font-size: 13px;
+    line-height: 15px;
+}
+
+.error .valid-text {
+    display: none;
 }
 
 .error .error__text {
@@ -139,34 +160,6 @@ body {
     text-transform: capitalize;
 }
 
-.role__item {}
-
-.field--payment {}
-
-.payment {}
-
-.error--payment {}
-
-.field--mail {}
-
-.mail {}
-
-.error--mail {}
-
-.password--create {}
-
-.pass {}
-
-.error--password {}
-
-.password--confurm {}
-
-.password--confurm .valid__text {
-    text-align: center;
-    font-size: 14px;
-    color: var(--valid-text);
-}
-
 /* Отображение и скрытие пароля */
 
 .field__input .hide-show {
@@ -188,7 +181,6 @@ body {
     background-position: center center;
     background-size: auto;
     background-repeat: no-repeat;
-
 }
 
 .eye-hide {
@@ -198,8 +190,6 @@ body {
 .eye-show {
     background-image: url(./../img/reg-form/eye-show.svg);
 }
-
-.pass-confurm {}
 
 .btn {
     margin: 25px 0px 6px;

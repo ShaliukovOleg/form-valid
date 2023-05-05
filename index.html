@@ -20,7 +20,6 @@
             </div>
         </div>
         <form class="reg-form__info" action="#!">
-
             <!-- Логин и проверка на доступность -->
             <div class="field field--login">
                 <div class="field__input">
@@ -28,8 +27,9 @@
                 </div>
                 <span class="error error--login">
                     <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
-                    <p class="error__text">Login is taken, please choose another one</p>
+                    <p class="error__text"></p>
                 </span>
+                <p class="valid-text">You can use letters, numbers and full stops</p>
             </div>
 
             <!-- Имя пользователя (проверка на максимум символов) -->
@@ -55,7 +55,7 @@
             </div>
 
             <!-- Дата рождения, проверка не ниже чем 1940 год -->
-            <div class="field field--date none">
+            <div class="field field--date">
                 <div class="field__input">
                     <input type="text" placeholder="Date of Birth" class="date">
                 </div>
@@ -63,8 +63,9 @@
                     <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
                     <p class="error__text">The date cannot be lower than 1940</p>
                 </span>
+                <p class="valid-text">Format DD.MM.YYYY</p>
             </div>
-
+ 
             <!-- Роль, выбор из предложенных вариантов -->
             <div class="field field--role none">
                 <label class="role__option">
@@ -98,7 +99,7 @@
 
                 </label>
             </div>
-
+ 
             <!-- Сумма оплаты, проверка на число без плавающей точки -->
             <div class="field field--payment none">
                 <div class="field__input">
@@ -129,7 +130,7 @@
                 </div>
                 <span class="error error--password">
                     <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
-                    <p class="error__text">Please enter at least 8 character with number, symbol, small and capital
+                    <p class="valid-text">Please enter at least 8 character with number, symbol, small and capital
                         letter</p>
                 </span>
             </div>
@@ -140,10 +141,10 @@
                     <input type="password" placeholder="Confurm password" class="password-confurm">
                     <div class="eye-hide hide-show"></div>
                 </div>
-                <p class="valid__text">You can use letters, numbers and full stops</p>
                 <span class="error error--password">
                     <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
                     <p class="error__text">Password don't match</p>
+                    <p class="valid-text" id="valid-text">You can use letters, numbers and full stops</p>
                 </span>
             </div>
 
@@ -154,7 +155,6 @@
         </form>
     </div>
 
-    
     <script src="./js/main.js"></script>
 </body>
 
