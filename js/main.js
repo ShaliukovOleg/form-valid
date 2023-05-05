@@ -114,4 +114,4 @@ form.addEventListener('submit', (check) => {
     ) {
         location.href = form.getAttribute('action');
     }
-});
+}); 
