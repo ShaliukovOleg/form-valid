@@ -19,7 +19,7 @@
                 <img src="./img/reg-form/logo.svg" alt="logo">
             </div>
         </div>
-        <form class="reg-form__info" action="#!">
+        <form class="reg-form__info" action="https://github.com/Ercera" target="_blank" method="post">
             <!-- Логин и проверка на доступность -->
             <div class="field field--login">
                 <div class="field__input">
@@ -27,7 +27,7 @@
                 </div>
                 <span class="error error--login">
                     <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
-                    <p class="error__text"></p>
+                    <p class="error__text error__text--login"></p>
                 </span>
                 <p class="valid-text">You can use letters, numbers and full stops</p>
             </div>
@@ -39,7 +39,7 @@
                 </div>
                 <span class="error error--first-name">
                     <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
-                    <p class="error__text">Please no less than 4 and no more than 20 characters</p>
+                    <p class="error__text error__text--name"></p>
                 </span>
             </div>
 
@@ -50,7 +50,7 @@
                 </div>
                 <span class="error error--first-name">
                     <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
-                    <p class="error__text">Please no less than 4 and no more than 20 characters</p>
+                    <p class="error__text error__text--lastname"></p>
                 </span>
             </div>
 
@@ -61,91 +61,93 @@
                 </div>
                 <span class="error error--date">
                     <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
-                    <p class="error__text">The date cannot be lower than 1940</p>
+                    <p class="error__text error__text--date">DD.MM.YYYY (example: 01.03.2010)</p>
                 </span>
                 <p class="valid-text">Format DD.MM.YYYY</p>
             </div>
  
             <!-- Роль, выбор из предложенных вариантов -->
-            <div class="field field--role none">
+            <div class="field field--role">
                 <label class="role__option">
-                    <input type="radio" class="role__item" name="role" checked>
-                    <p class="role__info">frontend developer</p>
+                    <input type="radio" class="role__item" name="role" value="Frontend developer" checked="checked">
+                    <span class="role__info">frontend developer</span>
                 </label>
 
                 <label class="role__option">
-                    <input type="radio" class="role__item" name="role">
-                    <p class="role__info">backend developer</p>
+                    <input type="radio" class="role__item" name="role" value="backend developer">
+                    <span class="role__info">backend developer</span>
                 </label>
 
                 <label class="role__option">
-                    <input type="radio" class="role__item" name="role">
-                    <p class="role__info">fullstack developer</p>
+                    <input type="radio" class="role__item" name="role" value="fullstack developer">
+                    <span class="role__info">fullstack developer</span>
                 </label>
 
                 <label class="role__option">
-                    <input type="radio" class="role__item" name="role">
-                    <p class="role__info">designer</p>
+                    <input type="radio" class="role__item" name="role" value="designer">
+                    <span class="role__info">designer</span>
                 </label>
 
                 <label class="role__option">
-                    <input type="radio" class="role__item" name="role">
-                    <p class="role__info">product manager</p>
+                    <input type="radio" class="role__item" name="role" value="product manager">
+                    <span class="role__info">product manager</span>
                 </label>
 
                 <label class="role__option">
-                    <input type="radio" class="role__item" name="role">
-                    <p class="role__info">teamlead</p>
+                    <input type="radio" class="role__item" name="role" value="teamlead">
+                    <span class="role__info">teamlead</span>
 
                 </label>
             </div>
  
             <!-- Сумма оплаты, проверка на число без плавающей точки -->
-            <div class="field field--payment none">
+            <div class="field field--payment">
                 <div class="field__input">
-                    <input type="number" placeholder="Payment" class="payment">
+                    <input type="text" placeholder="Payment" class="payment" oninput="checkPayment(this)">
                 </div>
                 <span class="error error--payment">
                     <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
-                    <p class="error__text">Please enter an integer</p>
+                    <p class="error__text error__text--payment"></p>
                 </span>
+                <p class="valid-text">Price in dollars</p>
             </div>
 
             <!-- Почта и проверка на валидность -->
-            <div class="field field--mail none">
+            <div class="field field--mail">
                 <div class="field__input">
-                    <input type="email" placeholder="Username" class="mail">
+                    <input type="email" placeholder="Email" class="mail">
                 </div>
                 <span class="error error--mail">
                     <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
-                    <p class="error__text">Please enter a valid email</p>
+                    <p class="error__text error__text--email">Please enter a valid email</p>
                 </span>
+                <p class="valid-text">Format ****@mail.com</p>
             </div>
 
             <!-- Пароль, глазик и проверка на валидность -->
-            <div class="field password--create none">
+            <div class="field password--create">
                 <div class="field__input">
                     <input type="password" placeholder="Create password" class="password">
                     <div class="eye-hide hide-show"></div>
                 </div>
                 <span class="error error--password">
                     <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
-                    <p class="valid-text">Please enter at least 8 character with number, symbol, small and capital
-                        letter</p>
+                    <p class="error__text error__text--password"></p>
                 </span>
+                <p class="valid-text">Eight character [A-Z] with number, symbol, small and capital letter</p>
             </div>
 
             <!-- Подтверждение пароля -->
-            <div class="field password--confurm">
+            <div class="field password--confirm">
                 <div class="field__input ">
-                    <input type="password" placeholder="Confurm password" class="password-confurm">
+                    <input type="password" placeholder="Confirm password" class="confirm">
                     <div class="eye-hide hide-show"></div>
                 </div>
-                <span class="error error--password">
+                <span class="error error--confirm-password">
                     <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
-                    <p class="error__text">Password don't match</p>
-                    <p class="valid-text" id="valid-text">You can use letters, numbers and full stops</p>
+                    <p class="error__text error__text--confirm">Password don't match</p>
                 </span>
+                <p class="valid-text">Eight character [A-Z] with number, symbol, small and capital letter</p>
             </div>
 
             <!-- Кнопка Submit и проверка на валидацию всех граф и выгрузка в объект -->
