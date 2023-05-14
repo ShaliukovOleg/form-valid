@@ -23,7 +23,7 @@
             <!-- Логин и проверка на доступность -->
             <div class="field field--login">
                 <div class="field__input">
-                    <input type="text" placeholder="Login" class="login">
+                    <input type="text" placeholder="Login" class="login" oninput="checkLogin(this)">
                 </div>
                 <span class="error error--login">
                     <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
@@ -35,7 +35,7 @@
             <!-- Имя пользователя (проверка на максимум символов) -->
             <div class="field field--name">
                 <div class="field__input">
-                    <input type="text" placeholder="First name" class="first-name">
+                    <input type="text" placeholder="First name" class="first-name" oninput="checkName(this)">
                 </div>
                 <span class="error error--first-name">
                     <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
@@ -46,7 +46,7 @@
             <!-- Фамилия пользователя (проверка на максимум символов) -->
             <div class="field field--lastname">
                 <div class="field__input">
-                    <input type="text" placeholder="Last name" class="last-name">
+                    <input type="text" placeholder="Last name" class="last-name" oninput="checkSurName(this)">
                 </div>
                 <span class="error error--first-name">
                     <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
@@ -57,7 +57,7 @@
             <!-- Дата рождения, проверка не ниже чем 1940 год -->
             <div class="field field--date">
                 <div class="field__input">
-                    <input type="text" placeholder="Date of Birth" class="date">
+                    <input type="text" placeholder="Date of Birth" class="date" oninput="checkDate(this)">
                 </div>
                 <span class="error error--date">
                     <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
@@ -65,7 +65,7 @@
                 </span>
                 <p class="valid-text">Format DD.MM.YYYY</p>
             </div>
- 
+
             <!-- Роль, выбор из предложенных вариантов -->
             <div class="field field--role">
                 <label class="role__option">
@@ -99,7 +99,7 @@
 
                 </label>
             </div>
- 
+
             <!-- Сумма оплаты, проверка на число без плавающей точки -->
             <div class="field field--payment">
                 <div class="field__input">
