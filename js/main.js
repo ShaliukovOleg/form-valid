@@ -214,7 +214,7 @@ const errorPassFormat = 'Example: Passwd1!';
 
 function checkPass() {
 	const passPattern =
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+		/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 	const errorTextPass = document.querySelector('.error__text--password');
 
 	!passwordInput.value.match(passPattern)
@@ -233,7 +233,7 @@ const fieldPasswordConfirm = form.querySelector('.password--confirm'),
 
 function checkPassConf() {
 	const passPattern =
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+		/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 	const errorTextPass = document.querySelector('.error__text--confirm');
 
 	const errorConfirm = 'Password mismatch!';
@@ -260,28 +260,29 @@ form.addEventListener('submit', (check) => {
 	checkPass();
 	checkPassConf();
 
-	// проверка функции при нажатии вызова
-	loginInput.addEventListener('keyup', checkLogin);
-	// loginInput.addEventListener('change', () => { checkLogin(); });
-	validText.addEventListener('keyup', checkLogin);
-	firstNameInput.addEventListener('keyup', checkName);
-	surNameInput.addEventListener('keyup', checkSurName);
-	dateInput.addEventListener('keyup', checkDate);
-	paymentInput.addEventListener('keyup', checkPayment);
-	mailInput.addEventListener('keyup', checkEmail);
-	passwordInput.addEventListener('keyup', checkPass);
-	passwordConfirmInput.addEventListener('keyup', checkPassConf);
+	document.addEventListener('DOMContentLoaded', () => {
+		// проверка функции при нажатии вызова
+		loginInput.addEventListener('keyup', checkLogin);
+		// validText.addEventListener('keyup', checkLogin);
+		firstNameInput.addEventListener('keyup', checkName);
+		surNameInput.addEventListener('keyup', checkSurName);
+		dateInput.addEventListener('keyup', checkDate);
+		paymentInput.addEventListener('keyup', checkPayment);
+		mailInput.addEventListener('keyup', checkEmail);
+		passwordInput.addEventListener('keyup', checkPass);
+		passwordConfirmInput.addEventListener('keyup', checkPassConf);
+	});
 
 	if (
 		!fieldLogin.classList.contains('invalid') &&
-        !validText.classList.contains('invalid') &&
-        !fieldName.classList.contains('invalid') &&
-        !fieldSurName.classList.contains('invalid') &&
-        !fieldDate.classList.contains('invalid') &&
-        !fieldPayment.classList.contains('invalid') &&
-        !fieldMail.classList.contains('invalid') &&
-        !fieldPassword.classList.contains('invalid') &&
-        !fieldPasswordConfirm.classList.contains('invalid')
+		!validText.classList.contains('invalid') &&
+		!fieldName.classList.contains('invalid') &&
+		!fieldSurName.classList.contains('invalid') &&
+		!fieldDate.classList.contains('invalid') &&
+		!fieldPayment.classList.contains('invalid') &&
+		!fieldMail.classList.contains('invalid') &&
+		!fieldPassword.classList.contains('invalid') &&
+		!fieldPasswordConfirm.classList.contains('invalid')
 	) {
 		userDataObject.Login = loginInput.value;
 		userDataObject.Name = firstNameInput.value;
