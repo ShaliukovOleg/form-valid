@@ -64,47 +64,47 @@ const submitComplete = 'Поздравляю, с успешным заполне
 // Проверка валидности логина
 function checkLogin() {
 	switch (true) {
-		case loginInput.value.match(characterLimit) === null: // Проверка на количество символов в строке и приравнивание к boolean
-			fieldLogin.classList.add('invalid');
-			validText.classList.add('invalid');
-			errorTextLogin.textContent = errorValueCharacters;
-			return;
-		case arrayLogins.includes(loginInput.value) === true: // Сравнение логина с массивом данных и приравнивание к boolean
-			fieldLogin.classList.add('invalid');
-			validText.classList.add('invalid');
-			errorText.textContent = errorLoginBusy;
-			return;
-		default:
-			fieldLogin.classList.remove('invalid');
-			validText.classList.remove('invalid');
+	case loginInput.value.match(characterLimit) === null: // Проверка на количество символов в строке и приравнивание к boolean
+		fieldLogin.classList.add('invalid');
+		validText.classList.add('invalid');
+		errorTextLogin.textContent = errorValueCharacters;
+		return;
+	case arrayLogins.includes(loginInput.value) === true: // Сравнение логина с массивом данных и приравнивание к boolean
+		fieldLogin.classList.add('invalid');
+		validText.classList.add('invalid');
+		errorText.textContent = errorLoginBusy;
+		return;
+	default:
+		fieldLogin.classList.remove('invalid');
+		validText.classList.remove('invalid');
 	};
 };
 
 // Проверка валидности имени
 function checkName() {
 	switch (true) {
-		case firstNameInput.value.match(characterLimit) === null: // Проверка на количество символов в строке
-			fieldName.classList.add('invalid');
-			validText.classList.add('invalid');
-			errorTextName.textContent = errorValueCharacters;
-			return;
-		default:
-			fieldName.classList.remove('invalid');
-			validText.classList.remove('invalid');
+	case firstNameInput.value.match(characterLimit) === null: // Проверка на количество символов в строке
+		fieldName.classList.add('invalid');
+		validText.classList.add('invalid');
+		errorTextName.textContent = errorValueCharacters;
+		return;
+	default:
+		fieldName.classList.remove('invalid');
+		validText.classList.remove('invalid');
 	};
 };
 
 // Проверка валидности фамилии
 function checkSurName() {
 	switch (true) {
-		case surNameInput.value.match(characterLimit) === null: // Проверка на количество символов в строке и приравнивание к boolean
-			fieldSurName.classList.add('invalid');
-			validText.classList.add('invalid');
-			errorTextSurName.textContent = errorValueCharacters;
-			return;
-		default:
-			fieldSurName.classList.remove('invalid');
-			validText.classList.remove('invalid');
+	case surNameInput.value.match(characterLimit) === null: // Проверка на количество символов в строке и приравнивание к boolean
+		fieldSurName.classList.add('invalid');
+		validText.classList.add('invalid');
+		errorTextSurName.textContent = errorValueCharacters;
+		return;
+	default:
+		fieldSurName.classList.remove('invalid');
+		validText.classList.remove('invalid');
 	};
 };
 
@@ -117,11 +117,11 @@ function checkDate() {
 	let match = dateInput.value.match(dateRegex);
 
 	switch (true) {
-		case dateInput.value.match(dateRegex) === null: // Проверка на количество символов в строке
-			fieldDate.classList.add('invalid');
-			validText.classList.add('invalid');
-			errorTextDate.textContent = errorFormat;
-			return;
+	case dateInput.value.match(dateRegex) === null: // Проверка на количество символов в строке
+		fieldDate.classList.add('invalid');
+		validText.classList.add('invalid');
+		errorTextDate.textContent = errorFormat;
+		return;
 	};
 
 	const day = match[1];
@@ -130,33 +130,33 @@ function checkDate() {
 	const dateValue = new Date(year, month - 1, day);
 
 	switch (true) {
-		case (dateValue.getFullYear() == year && dateValue.getMonth() == month - 1 && dateValue.getDate() == day) === false:
-			// Проверка на корректность символов
-			fieldDate.classList.add('invalid');
-			validText.classList.add('invalid');
-			errorTextDate.textContent = errorFormat;
-			break;
-		case (dateValue > dateBefore) === false:
-			// Не ниже 1940
-			fieldDate.classList.add('invalid');
-			validText.classList.add('invalid');
-			errorTextDate.textContent = errorDateBelow;
-			break;
-		case (dateValue < dateNow) === false:
-			// Не больше чем сейчас
-			fieldDate.classList.add('invalid');
-			validText.classList.add('invalid');
-			errorTextDate.textContent = errorDateFuture;
-			break;
+	case (dateValue.getFullYear() == year && dateValue.getMonth() == month - 1 && dateValue.getDate() == day) === false:
+		// Проверка на корректность символов
+		fieldDate.classList.add('invalid');
+		validText.classList.add('invalid');
+		errorTextDate.textContent = errorFormat;
+		break;
+	case (dateValue > dateBefore) === false:
+		// Не ниже 1940
+		fieldDate.classList.add('invalid');
+		validText.classList.add('invalid');
+		errorTextDate.textContent = errorDateBelow;
+		break;
+	case (dateValue < dateNow) === false:
+		// Не больше чем сейчас
+		fieldDate.classList.add('invalid');
+		validText.classList.add('invalid');
+		errorTextDate.textContent = errorDateFuture;
+		break;
 
-		case (Math.ceil((dateNow - dateValue) / (1000 * 3600 * 24))) > 6574 === false:
-			// проверка на совершеннолетие пользователя согласно вводным данным
-			fieldDate.classList.add('invalid');
-			errorTextDate.textContent = errorAge;
-			break;
-		default:
-			fieldDate.classList.remove('invalid');
-			validText.classList.remove('invalid');
+	case (Math.ceil((dateNow - dateValue) / (1000 * 3600 * 24))) > 6574 === false:
+		// проверка на совершеннолетие пользователя согласно вводным данным
+		fieldDate.classList.add('invalid');
+		errorTextDate.textContent = errorAge;
+		break;
+	default:
+		fieldDate.classList.remove('invalid');
+		validText.classList.remove('invalid');
 	};
 };
 
@@ -175,18 +175,18 @@ function checkPayment() {
 
 	!paymentInput.value.match(paymentPattern)
 		? (fieldPayment.classList.add('invalid'),
-			errorTextPayment.textContent = errorValueCharacters)
+		errorTextPayment.textContent = errorValueCharacters)
 		: (fieldPayment.classList.remove('invalid'),
-			validText.classList.remove('invalid'));
+		validText.classList.remove('invalid'));
 };
 
 // Проверка валидности почты
 function checkEmail() {
 	!mailInput.value.match(emailPattern)
 		? (fieldMail.classList.add('invalid'),
-			errorTextEmail.textContent = errorEmailFormat)
+		errorTextEmail.textContent = errorEmailFormat)
 		: (fieldMail.classList.remove('invalid'),
-			validText.classList.remove('invalid'));
+		validText.classList.remove('invalid'));
 };
 
 // Переключение видимости пароля
@@ -196,9 +196,9 @@ eyeToggle.forEach((eyeIcon) => {
 		// для переключения типа инпута
 		passInput.type === 'password'
 			? (eyeIcon.classList.replace('eye-hide', 'eye-show'),
-				(passInput.type = 'text'))
+			(passInput.type = 'text'))
 			: (eyeIcon.classList.replace('eye-show', 'eye-hide'),
-				passInput.type = 'password');
+			passInput.type = 'password');
 	});
 });
 
@@ -210,9 +210,9 @@ function checkPass() {
 
 	!passwordInput.value.match(passPattern)
 		? (fieldPassword.classList.add('invalid'),
-			errorTextPass.textContent = errorPassFormat)
+		errorTextPass.textContent = errorPassFormat)
 		: (fieldPassword.classList.remove('invalid'),
-			validText.classList.remove('invalid'));
+		validText.classList.remove('invalid'));
 }
 
 // Проверка валидности подтверждения пароля
@@ -224,12 +224,12 @@ function checkPassConf() {
 	const errorConfirm = 'Password mismatch!';
 	!passwordConfirmInput.value.match(passPattern)
 		? (fieldPasswordConfirm.classList.add('invalid'),
-			errorTextPass.textContent = errorPassFormat)
+		errorTextPass.textContent = errorPassFormat)
 		: passwordInput.value !== passwordConfirmInput.value || passwordConfirmInput.value === ''
 			? (fieldPasswordConfirm.classList.add('invalid'),
-				errorTextPass.textContent = errorConfirm)
+			errorTextPass.textContent = errorConfirm)
 			: (fieldPasswordConfirm.classList.remove('invalid'),
-				validText.classList.remove('invalid'));
+			validText.classList.remove('invalid'));
 }
 
 // Проверка функций на корректность
