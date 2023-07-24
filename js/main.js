@@ -61,68 +61,104 @@ paymentInput.maxLength = '10';
 const userDataObject = {};
 const submitComplete = 'Поздравляю, с успешным заполнением формы! Вы восхитительны!';
 
+// Добавление класса invalid
+function addInvalidClass(element) {
+	element.classList.add('invalid');
+}
+
+// Удаление класса invalid
+function removeInvalidClass(element) {
+	element.classList.remove('invalid');
+}
+
+// Функция для проверки инпутов
+function validateInput(inputElement, regex, errorMessageElement, errorMessage) {
+	const isValid = inputElement.value.match(regex);
+	if (!isValid) {
+		addInvalidClass(inputElement);
+		addInvalidClass(validText);
+		errorMessageElement.textContent = errorMessage;
+		return false;
+	}
+	removeInvalidClass(inputElement);
+	removeInvalidClass(validText);
+	return true;
+}
+
 // Проверка валидности логина
 function checkLogin() {
-	switch (true) {
-	case loginInput.value.match(characterLimit) === null: // Проверка на количество символов в строке и приравнивание к boolean
-		fieldLogin.classList.add('invalid');
-		validText.classList.add('invalid');
+	const isCharacterLimitValid = loginInput.value.match(characterLimit);
+	const isLoginTaken = arrayLogins.includes(loginInput.value);
+
+	if (!isCharacterLimitValid) {
+		addInvalidClass(fieldLogin);
+		addInvalidClass(validText);
 		errorTextLogin.textContent = errorValueCharacters;
 		return;
-	case arrayLogins.includes(loginInput.value) === true: // Сравнение логина с массивом данных и приравнивание к boolean
-		fieldLogin.classList.add('invalid');
-		validText.classList.add('invalid');
-		errorText.textContent = errorLoginBusy;
+	}
+
+	if (isLoginTaken) {
+		addInvalidClass(fieldLogin);
+		addInvalidClass(validText);
+		errorTextLogin.textContent = errorLoginBusy;
 		return;
-	default:
-		fieldLogin.classList.remove('invalid');
-		validText.classList.remove('invalid');
-	};
+	}
+
+	removeInvalidClass(fieldLogin);
+	removeInvalidClass(validText);
 };
 
 // Проверка валидности имени
 function checkName() {
-	switch (true) {
-	case firstNameInput.value.match(characterLimit) === null: // Проверка на количество символов в строке
-		fieldName.classList.add('invalid');
-		validText.classList.add('invalid');
-		errorTextName.textContent = errorValueCharacters;
+	const isCharacterLimitValid = validateInput(firstNameInput, characterLimit, errorTextName, errorValueCharacters);
+
+	if (!isCharacterLimitValid) {
+		addInvalidClass(fieldName);
+		addInvalidClass(validText);
 		return;
-	default:
-		fieldName.classList.remove('invalid');
-		validText.classList.remove('invalid');
-	};
-};
+	}
+
+	removeInvalidClass(fieldName);
+	removeInvalidClass(validText);
+}
 
 // Проверка валидности фамилии
 function checkSurName() {
-	switch (true) {
-	case surNameInput.value.match(characterLimit) === null: // Проверка на количество символов в строке и приравнивание к boolean
-		fieldSurName.classList.add('invalid');
-		validText.classList.add('invalid');
-		errorTextSurName.textContent = errorValueCharacters;
+	const isCharacterLimitValid = validateInput(surNameInput, characterLimit, errorTextSurName, errorValueCharacters);
+
+	if (!isCharacterLimitValid) {
+		addInvalidClass(fieldSurName);
+		addInvalidClass(validText);
 		return;
-	default:
-		fieldSurName.classList.remove('invalid');
-		validText.classList.remove('invalid');
-	};
+	}
+
+	removeInvalidClass(fieldSurName);
+	removeInvalidClass(validText);
 };
 
 // Проверка валидности даты
 function checkDate() {
-	const dateInfo = dateInput.value;
-	dateInput.value = dateInfo.replace(/([^\\\[\]\^\$\,\.\|.\?.\*.\+.\(.\).\d])/g, '').replace(/([\\.\[.\].\^.\$.\,.\..\|.\?.\*.\+.\(.\)])/g, '.');
+	let dateInfo = dateInput.value;
+	// Удаление всех символов, кроме цифр
+	dateInfo = dateInfo.replace(/[^0-9]/g, '');
+
+	// Вставка точки после второго символа
+	dateInfo = dateInfo.replace(/^(.{2})/, '$1.');
+
+	// Вставка точки после четвертого символа
+	dateInfo = dateInfo.replace(/^(.{5})/, '$1.');
+
+	dateInput.value = dateInfo;
 	const dateBefore = new Date(1941 - 1, 13 - 1, 31);
 	const dateNow = new Date(Date.now());
 	let match = dateInput.value.match(dateRegex);
 
-	switch (true) {
-	case dateInput.value.match(dateRegex) === null: // Проверка на количество символов в строке
-		fieldDate.classList.add('invalid');
-		validText.classList.add('invalid');
+	if (dateInput.value.match(dateRegex) === null) { // Проверка на количество символов в строке
+		addInvalidClass(fieldDate);
+		addInvalidClass(validText);
 		errorTextDate.textContent = errorFormat;
 		return;
-	};
+	}
 
 	const day = match[1];
 	const month = match[2];
@@ -130,111 +166,113 @@ function checkDate() {
 	const dateValue = new Date(year, month - 1, day);
 
 	switch (true) {
-	case (dateValue.getFullYear() == year && dateValue.getMonth() == month - 1 && dateValue.getDate() == day) === false:
+	case (dateValue.getFullYear() == year
+			&& dateValue.getMonth() == month - 1
+			&& dateValue.getDate() == day) === false:
 		// Проверка на корректность символов
-		fieldDate.classList.add('invalid');
-		validText.classList.add('invalid');
+		addInvalidClass(fieldDate);
+		addInvalidClass(validText);
 		errorTextDate.textContent = errorFormat;
 		break;
-	case (dateValue > dateBefore) === false:
-		// Не ниже 1940
-		fieldDate.classList.add('invalid');
-		validText.classList.add('invalid');
+	case dateValue < dateBefore:
+		addInvalidClass(fieldDate);
+		addInvalidClass(validText);
 		errorTextDate.textContent = errorDateBelow;
 		break;
-	case (dateValue < dateNow) === false:
-		// Не больше чем сейчас
-		fieldDate.classList.add('invalid');
-		validText.classList.add('invalid');
+	case dateValue > dateNow:
+		addInvalidClass(fieldDate);
+		addInvalidClass(validText);
 		errorTextDate.textContent = errorDateFuture;
 		break;
-
-	case (Math.ceil((dateNow - dateValue) / (1000 * 3600 * 24))) > 6574 === false:
-		// проверка на совершеннолетие пользователя согласно вводным данным
-		fieldDate.classList.add('invalid');
+	case Math.ceil((dateNow - dateValue) / (1000 * 3600 * 24)) > 6574 === false:
+		addInvalidClass(fieldDate);
 		errorTextDate.textContent = errorAge;
 		break;
 	default:
-		fieldDate.classList.remove('invalid');
-		validText.classList.remove('invalid');
+		removeInvalidClass(fieldDate);
+		removeInvalidClass(validText);
 	};
 };
 
 // Выгрузка значения профессии
 let professionInfo = '';
-for (const profValue of profession) {
-	(profValue.checked)
-		? professionInfo = profValue.value
-		: '';
-};
+const professionValue = Array.from(profession).find((profValue) => profValue.checked)?.value;
+userDataObject.Profession = professionValue;
 
 // Проверка валидности оплаты
 function checkPayment() {
 	const value = paymentInput.value;
-	paymentInput.value = value.replace(/([^1-9]{0})([^0-9]{1,10})/g, '');
+	paymentInput.value = value.replace(/[^0-9]/g, ''); // Удаление всех символов, кроме цифр
 
-	!paymentInput.value.match(paymentPattern)
-		? (fieldPayment.classList.add('invalid'),
-		errorTextPayment.textContent = errorValueCharacters)
-		: (fieldPayment.classList.remove('invalid'),
-		validText.classList.remove('invalid'));
-};
+	if (!paymentInput.value.match(paymentPattern)) {
+		addInvalidClass(fieldPayment);
+		addInvalidClass(validText);
+		errorTextPayment.textContent = errorValueCharacters;
+	} else {
+		removeInvalidClass(fieldPayment);
+		removeInvalidClass(validText);
+	}
+}
 
 // Проверка валидности почты
 function checkEmail() {
-	!mailInput.value.match(emailPattern)
-		? (fieldMail.classList.add('invalid'),
-		errorTextEmail.textContent = errorEmailFormat)
-		: (fieldMail.classList.remove('invalid'),
-		validText.classList.remove('invalid'));
-};
+	if (!mailInput.value.match(emailPattern)) {
+		addInvalidClass(fieldMail);
+		errorTextEmail.textContent = errorEmailFormat;
+	} else {
+		removeInvalidClass(fieldMail);
+	}
+}
 
 // Переключение видимости пароля
-eyeToggle.forEach((eyeIcon) => {
-	eyeIcon.addEventListener('click', () => {
-		const passInput = eyeIcon.parentElement.querySelector('input');
-		// для переключения типа инпута
-		passInput.type === 'password'
-			? (eyeIcon.classList.replace('eye-hide', 'eye-show'),
-			(passInput.type = 'text'))
-			: (eyeIcon.classList.replace('eye-show', 'eye-hide'),
-			passInput.type = 'password');
-	});
-});
+function togglePasswordVisibility(input, eyeIcon) {
+	const passInput = input;
+	passInput.type === 'password'
+		? (eyeIcon.classList.replace('eye-hide', 'eye-show'), (passInput.type = 'text'))
+		: (eyeIcon.classList.replace('eye-show', 'eye-hide'), (passInput.type = 'password'));
+}
 
 // Проверка валидности пароля
 function checkPass() {
-	const passPattern =
-		/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+	const passPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 	const errorTextPass = document.querySelector('.error__text--password');
+	const isPassValid = passwordInput.value.match(passPattern);
 
-	!passwordInput.value.match(passPattern)
-		? (fieldPassword.classList.add('invalid'),
-		errorTextPass.textContent = errorPassFormat)
-		: (fieldPassword.classList.remove('invalid'),
-		validText.classList.remove('invalid'));
+	if (!isPassValid) {
+		addInvalidClass(fieldPassword);
+		errorTextPass.textContent = errorPassFormat;
+	} else {
+		removeInvalidClass(fieldPassword);
+	}
 }
 
 // Проверка валидности подтверждения пароля
 function checkPassConf() {
-	const passPattern =
-		/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+	const passPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 	const errorTextPass = document.querySelector('.error__text--confirm');
-
 	const errorConfirm = 'Password mismatch!';
-	!passwordConfirmInput.value.match(passPattern)
-		? (fieldPasswordConfirm.classList.add('invalid'),
-		errorTextPass.textContent = errorPassFormat)
-		: passwordInput.value !== passwordConfirmInput.value || passwordConfirmInput.value === ''
-			? (fieldPasswordConfirm.classList.add('invalid'),
-			errorTextPass.textContent = errorConfirm)
-			: (fieldPasswordConfirm.classList.remove('invalid'),
-			validText.classList.remove('invalid'));
+	const isPassConfValid = passwordConfirmInput.value.match(passPattern);
+
+	if (!isPassConfValid) {
+		addInvalidClass(fieldPasswordConfirm);
+		errorTextPass.textContent = errorPassFormat;
+	} else if (passwordInput.value !== passwordConfirmInput.value || passwordConfirmInput.value === '') {
+		addInvalidClass(fieldPasswordConfirm);
+		errorTextPass.textContent = errorConfirm;
+	} else {
+		removeInvalidClass(fieldPasswordConfirm);
+	}
 }
 
+eyeToggle.forEach((eyeIcon) => {
+	eyeIcon.addEventListener('click', () => {
+		const passInput = eyeIcon.parentElement.querySelector('input');
+		togglePasswordVisibility(passInput, eyeIcon);
+	});
+});
+
 // Проверка функций на корректность
-form.addEventListener('submit', (check) => {
-	check.preventDefault(); // предотвращение отправки формы
+function validateFormInputs() {
 	checkLogin();
 	checkName();
 	checkSurName();
@@ -243,29 +281,21 @@ form.addEventListener('submit', (check) => {
 	checkEmail();
 	checkPass();
 	checkPassConf();
+}
 
-	// проверка функции при нажатии вызова
-	loginInput.addEventListener('keyup', checkLogin);
-	// validText.addEventListener('keyup', checkLogin);
-	firstNameInput.addEventListener('keyup', checkName);
-	surNameInput.addEventListener('keyup', checkSurName);
-	dateInput.addEventListener('keyup', checkDate);
-	paymentInput.addEventListener('keyup', checkPayment);
-	mailInput.addEventListener('keyup', checkEmail);
-	passwordInput.addEventListener('keyup', checkPass);
-	passwordConfirmInput.addEventListener('keyup', checkPassConf);
+function updateFormValidity() {
+	const isFormValid =
+        !fieldLogin.classList.contains('invalid') &&
+        !validText.classList.contains('invalid') &&
+        !fieldName.classList.contains('invalid') &&
+        !fieldSurName.classList.contains('invalid') &&
+        !fieldDate.classList.contains('invalid') &&
+        !fieldPayment.classList.contains('invalid') &&
+        !fieldMail.classList.contains('invalid') &&
+        !fieldPassword.classList.contains('invalid') &&
+        !fieldPasswordConfirm.classList.contains('invalid');
 
-	if (
-		!fieldLogin.classList.contains('invalid') &&
-		!validText.classList.contains('invalid') &&
-		!fieldName.classList.contains('invalid') &&
-		!fieldSurName.classList.contains('invalid') &&
-		!fieldDate.classList.contains('invalid') &&
-		!fieldPayment.classList.contains('invalid') &&
-		!fieldMail.classList.contains('invalid') &&
-		!fieldPassword.classList.contains('invalid') &&
-		!fieldPasswordConfirm.classList.contains('invalid')
-	) {
+	if (isFormValid) {
 		userDataObject.Login = loginInput.value;
 		userDataObject.Name = firstNameInput.value;
 		userDataObject.SurName = surNameInput.value;
@@ -280,4 +310,20 @@ form.addEventListener('submit', (check) => {
 
 		location.href = form.getAttribute('action');
 	}
-}); 
+}
+
+form.addEventListener('submit', (event) => {
+	event.preventDefault(); // предотвращение отправки формы
+	validateFormInputs();
+	updateFormValidity();
+});
+
+// Добавление обработчиков событий "input" для каждого поля ввода
+loginInput.addEventListener('input', validateFormInputs);
+firstNameInput.addEventListener('input', validateFormInputs);
+surNameInput.addEventListener('input', validateFormInputs);
+dateInput.addEventListener('input', validateFormInputs);
+paymentInput.addEventListener('input', validateFormInputs);
+mailInput.addEventListener('input', validateFormInputs);
+passwordInput.addEventListener('input', validateFormInputs);
+passwordConfirmInput.addEventListener('input', validateFormInputs);
