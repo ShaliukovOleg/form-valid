@@ -12,6 +12,7 @@ html {
     --field-active: #eeeeee;
     --form-title: #252525;
     --textcolor: #000;
+    --textFocus: #5156e7;
     --roleradio: #40A48A;
     --error: #df362a;
     --valid-text: rgba(0, 0, 0, 0.5);
@@ -74,7 +75,7 @@ body {
     min-height: 75px;
 }
 
-.field--date{
+.field--date {
     margin-bottom: 10px;
 
 }
@@ -89,14 +90,77 @@ body {
     background-color: var(--field-active);
 }
 
+.field__input label {
+    padding: 0 10px;
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translate(0, -55%);
+    text-transform: capitalize;
+    pointer-events: none;
+    font-size: 17px;
+    border-radius: 8px 4px;
+    color: var(--textcolor);
+    opacity: 0.5;
+}
+
 .field__input input {
     height: 100%;
     width: 100%;
     outline: none;
-    border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 15px;
-    border: 1px solid #d1d1d1;
+    border: 2px solid #d1d1d1;
+}
+
+.field__input input:focus {
+    border: 2px solid var(--textFocus);
+    background-color: var(--field-active);
+}
+
+.field__input input:focus+label,
+.field__input input:not(:placeholder-shown)+label{
+    top: 0;
+    left: 15px;
+    font-size: 15px;
+    background-color: var(--field-active);
+    border: 2px solid var(--background);
+    color: var(--textFocus);
+    opacity: 1;
+    transition: opacity 0.25s ease-in-out, 
+    position 0.25s ease-in-out, 
+    font-size 0.25s ease-in-out, 
+    color 0.25s ease-in-out
+}
+
+/* .field__input .hide-show:hover  */
+
+.field__input input:focus:hover:placeholder-shown+label {
+    border: 2px solid var(--background);
+}
+
+.field__input input:hover:placeholder-shown+label {
+    background-color: var(--field-active);
+    border-color: var(--field-active);
+}
+
+.field__input input:hover:not(:placeholder-shown)+label {
+    background-color: var(--field-active);
+}
+
+.field__input input:not(:focus)+label {
+    background-color: white;
+    color: var(--textcolor);
+    border: 2px solid white;
+}
+
+.field--login .valid-text,
+.field--date .valid-text {
+    display: flex;
+    margin-left: 5px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--valid-text);
 }
 
 .valid-text {
@@ -118,6 +182,21 @@ body {
 }
 
 .invalid input {
+    border-color: var(--error);
+}
+
+.invalid input:hover:placeholder-shown+label {
+    background-color: var(--field-active);
+    border-color: var(--field-active);
+}
+
+.invalid input:not(:hover):not(:placeholder-shown)+label,
+.invalid input:hover:not(:placeholder-shown)+label {
+    color: var(--error);
+    border-color: var(--error);
+}
+
+.invalid input:focus:not(:placeholder-shown) {
     border-color: var(--error);
 }
 
@@ -217,6 +296,7 @@ body {
 .role__option>input:disabled+span::before {
     background-color: #e9ecef;
 }
+
 /* Отображение и скрытие пароля */
 
 .field__input .hide-show {

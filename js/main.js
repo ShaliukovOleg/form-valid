@@ -40,6 +40,7 @@ const errorTextEmail = document.querySelector('.error__text--email');
 const errorValueCharacters = 'Please no less than 3 and no more than 20 characters';
 const errorLoginBusy = 'Login is taken, please choose another one';
 const errorPassFormat = 'Example: Passwd1!';
+const errorPayment = 'Please no less than 2 and no more than 10 characters';
 // Ошибки при проверке даты
 const errorDateBelow = 'The date cannot be lower than 1940'; // дата не ниже 1940 года
 const errorDateFuture = 'You can`t pick a date from the future'; // дата не больше сегодняшнего числа
@@ -207,7 +208,7 @@ function checkPayment() {
 	if (!paymentInput.value.match(paymentPattern)) {
 		addInvalidClass(fieldPayment);
 		addInvalidClass(validText);
-		errorTextPayment.textContent = errorValueCharacters;
+		errorTextPayment.textContent = errorPayment;
 	} else {
 		removeInvalidClass(fieldPayment);
 		removeInvalidClass(validText);
@@ -319,11 +320,11 @@ form.addEventListener('submit', (event) => {
 });
 
 // Добавление обработчиков событий "input" для каждого поля ввода
-loginInput.addEventListener('input', validateFormInputs);
-firstNameInput.addEventListener('input', validateFormInputs);
-surNameInput.addEventListener('input', validateFormInputs);
-dateInput.addEventListener('input', validateFormInputs);
-paymentInput.addEventListener('input', validateFormInputs);
-mailInput.addEventListener('input', validateFormInputs);
-passwordInput.addEventListener('input', validateFormInputs);
-passwordConfirmInput.addEventListener('input', validateFormInputs);
+// loginInput.addEventListener('input', validateFormInputs);
+// firstNameInput.addEventListener('input', validateFormInputs);
+// surNameInput.addEventListener('input', validateFormInputs);
+// dateInput.addEventListener('input', validateFormInputs);
+// paymentInput.addEventListener('input', validateFormInputs);
+// mailInput.addEventListener('input', validateFormInputs);
+// passwordInput.addEventListener('input', validateFormInputs);
+// passwordConfirmInput.addEventListener('input', validateFormInputs);

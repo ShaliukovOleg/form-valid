@@ -19,11 +19,13 @@
                 <img src="./img/reg-form/logo.svg" alt="logo">
             </div>
         </div>
-        <form class="reg-form__info" action="https://github.com/Ercera" target="_blank" method="post">
+        <form class="reg-form__info" action="#!" target="_blank" method="post">
+
             <!-- Логин и проверка на доступность -->
             <div class="field field--login">
                 <div class="field__input">
-                    <input type="text" placeholder="Login" class="login" oninput="checkLogin(this)">
+                    <input type="text" placeholder=" " class="login" oninput="checkLogin(this)">
+                    <label for="login">login</label>
                 </div>
                 <span class="error error--login">
                     <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
@@ -35,7 +37,8 @@
             <!-- Имя пользователя (проверка на максимум символов) -->
             <div class="field field--name">
                 <div class="field__input">
-                    <input type="text" placeholder="First name" class="first-name" oninput="checkName(this)">
+                    <input type="text" placeholder=" " class="first-name" oninput="checkName(this)">
+                    <label for="first-name">first name</label>
                 </div>
                 <span class="error error--first-name">
                     <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
@@ -46,7 +49,8 @@
             <!-- Фамилия пользователя (проверка на максимум символов) -->
             <div class="field field--lastname">
                 <div class="field__input">
-                    <input type="text" placeholder="Last name" class="last-name" oninput="checkSurName(this)">
+                    <input type="text" placeholder=" " class="last-name" oninput="checkSurName(this)">
+                    <label for="last-name">last name</label>
                 </div>
                 <span class="error error--first-name">
                     <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
@@ -57,7 +61,8 @@
             <!-- Дата рождения, проверка не ниже чем 1940 год -->
             <div class="field field--date">
                 <div class="field__input">
-                    <input type="text" placeholder="Date of Birth" class="date" oninput="checkDate(this)">
+                    <input type="text" placeholder=" " class="date" oninput="checkDate(this)">
+                    <label for="date">date of birth</label>
                 </div>
                 <span class="error error--date">
                     <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
@@ -103,7 +108,8 @@
             <!-- Сумма оплаты, проверка на число без плавающей точки -->
             <div class="field field--payment">
                 <div class="field__input">
-                    <input type="text" placeholder="Payment" class="payment" oninput="checkPayment(this)">
+                    <input type="text" placeholder=" " class="payment" oninput="checkPayment(this)">
+                    <label for="payment">payment</label>
                 </div>
                 <span class="error error--payment">
                     <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
@@ -115,7 +121,8 @@
             <!-- Почта и проверка на валидность -->
             <div class="field field--mail">
                 <div class="field__input">
-                    <input type="email" placeholder="Email" class="mail">
+                    <input type="email" placeholder=" " class="mail">
+                    <label for="email">email</label>
                 </div>
                 <span class="error error--mail">
                     <img src="./img/reg-form/error-minus.svg" alt="error-icon" class="error__icon">
@@ -127,7 +134,8 @@
             <!-- Пароль, глазик и проверка на валидность -->
             <div class="field password--create">
                 <div class="field__input">
-                    <input type="password" placeholder="Create password" class="password">
+                    <input type="password" placeholder=" " class="password">
+                    <label for="password">create password</label>
                     <div class="eye-hide hide-show"></div>
                 </div>
                 <span class="error error--password">
@@ -140,7 +148,8 @@
             <!-- Подтверждение пароля -->
             <div class="field password--confirm">
                 <div class="field__input ">
-                    <input type="password" placeholder="Confirm password" class="confirm">
+                    <input type="password" placeholder=" " class="confirm">
+                    <label for="confirm">confirm password</label>
                     <div class="eye-hide hide-show"></div>
                 </div>
                 <span class="error error--confirm-password">
